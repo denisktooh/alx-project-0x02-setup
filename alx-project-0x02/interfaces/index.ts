@@ -33,3 +33,42 @@ export interface PostsModalProps {
   onClose: () => void;
   onSubmit: (data: PostProps) => void;
 }
+
+interface Geo {
+  lat: string;
+  lng: string;
+}
+
+interface Address {
+  street: string;
+  suite: string;
+  city: string;
+  zipcode: string;
+  geo: Geo;
+}
+
+interface Company {
+  name: string;
+  catchPhrase: string;
+  bs: string;
+}
+
+export interface UserProps {
+  id: number;
+  name: string;
+  username: string;
+  email: string;
+  address: Address;
+  phone: string;
+  website: string;
+  company: Company;
+}
+
+export interface UsersPageProps {
+  posts: UserProps[];
+}
+
+export interface UserModalProps {
+  onClose: () => void;
+  onSubmit: (post: UserProps) => void;
+}
