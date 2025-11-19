@@ -18,37 +18,39 @@ const PostModal: React.FC<PostModalProps> = ({ onClose, onSubmit }) => {
       <div className="bg-white text-black p-6 rounded-lg w-full max-w-md shadow-lg">
         <h2 className="text-xl font-bold mb-4">Create New Post</h2>
 
-        <input
-          type="text"
-          placeholder="Title"
-          className="w-full border p-2 mb-3 rounded"
-          value={title}
-          onChange={(e) => setTitle(e.target.value)}
-        />
+        <form onSubmit={handleSubmit}>
+          <input
+            type="text"
+            placeholder="Title"
+            className="w-full border p-2 mb-3 rounded"
+            value={title}
+            onChange={(e) => setTitle(e.target.value)}
+          />
 
-        <textarea
-          placeholder="Content"
-          rows={4}
-          className="w-full border p-2 mb-3 rounded"
-          value={content}
-          onChange={(e) => setContent(e.target.value)}
-        />
+          <textarea
+            placeholder="Content"
+            rows={4}
+            className="w-full border p-2 mb-3 rounded"
+            value={content}
+            onChange={(e) => setContent(e.target.value)}
+          />
 
-        <div className="flex justify-end gap-3">
-          <button
-            onClick={onClose}
-            className="px-4 py-2 bg-gray-300 rounded"
-          >
-            Cancel
-          </button>
+          <div className="flex justify-end gap-3">
+            <button
+              onClick={onClose}
+              className="px-4 py-2 bg-gray-300 rounded"
+            >
+              Cancel
+            </button>
 
-          <button
-            onClick={handleSubmit}
-            className="px-4 py-2 bg-blue-600 text-white rounded"
-          >
-            Save
-          </button>
-        </div>
+            <button
+              type="submit"
+              className="px-4 py-2 bg-blue-600 text-white rounded"
+            >
+              Save
+            </button>
+          </div>
+        </form>
       </div>
     </div>
   );
