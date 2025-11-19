@@ -1,0 +1,54 @@
+import PostCard from "@/components/common/PostCard";
+import PostsModal from "@/components/common/PostsModal";
+import Header from "@/components/layout/Header";
+import { PostProps, PostComponentsProps } from "@/interfaces";
+import { useState } from "react";
+
+const Posts: React.FC<PostComponentsProps> = ({ posts }) => {
+  const [isModalOpen, setModalOpen] = useState(false);
+  const [data, setPost] = useState<PostProps | null>(null);
+
+
+  const handleAddPost = (newPost: PostProps) => {
+    setPost({ ...newPost, id: posts.length + 1 });
+  };
+
+
+  return (
+    <div className="flex flex-col h-screen">
+      <Header />
+      <main className="p-4">
+        <div className="flex justify-between">
+          <h1 className=" text-2xl font-semibold">Post Content</h1>
+          <button onClick={() => setModalOpen(true)}
+            className="bg-blue-700 px-4 py-2 rounded-full text-white">Add Post</button>
+        </div>
+        <div className="grid grid-cols-3 gap-2 ">
+          {
+            posts?.map(({ title, content, userId, id }: PostProps, key: number) => (
+              <PostCard title={title} content={content} userId={userId} id={id} key={key} />
+            ))
+          }
+        </div>
+      </main>
+
+      {isModalOpen && (
+        <PostsModal onClose={() => setModalOpen(false)} onSubmit={handleAddPost} />
+      )}
+    </div>
+  )
+}
+
+
+export async function getStaticProps() {
+  const response = await fetch("https://jsonplaceholder.typicode.com/posts")
+  const posts = await response.json()
+
+  return {
+    props: {
+      posts
+    }
+  }
+}
+
+export default Posts;
